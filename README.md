@@ -4,8 +4,7 @@ INKWELL is a minimalist personal publishing platform built with Node.js, Express
 
 The project focuses on understanding the fundamentals of web development, including HTTP requests, Express routing, server-side rendering, forms, CRUD operations and responsive UI design.
 
-🌐 Live Demo
-https://inkwell-blog.onrender.com
+🌐 Live Demo  [https://inkwell-6flo.onrender.com](url)
 
 ## Features
 
