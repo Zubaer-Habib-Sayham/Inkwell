@@ -1,0 +1,60 @@
+<main>
+<%- include("partials/header", { title: "Home" }) %>
+
+<section class="hero">
+  <p class="eyebrow">PERSONAL PUBLISHING</p>
+
+  <h1>Write.<br>Think.<br>Publish.</h1>
+
+  <p class="hero-text">
+    A small corner of the internet for ideas, experiments and things worth sharing.
+  </p>
+
+  <a href="/compose" class="button">Write an article</a>
+</section>
+
+<section class="articles-section">
+
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">LATEST</p>
+      <h2>Recent articles</h2>
+    </div>
+  </div>
+
+  <div class="article-grid">
+
+    <% posts.forEach(post => { %>
+
+        <a href="/post/<%= post.id %>" class="article-link">
+
+            <article class="article-card">
+
+                <p class="article-category">
+                <%= post.category %>
+                </p>
+
+                <h3>
+                <%= post.title %>
+                </h3>
+
+                <p class="article-excerpt">
+                <%= post.excerpt %>
+                </p>
+
+                <div class="article-meta">
+                <span><%= post.date %></span>
+                <span><%= post.readTime %> min read</span>
+                </div>
+
+            </article>
+
+        </a>
+
+    <% }) %>
+
+    </div>
+
+</section>
+
+<%- include("partials/footer") %>

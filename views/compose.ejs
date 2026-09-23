@@ -1,0 +1,62 @@
+<main>
+    <%- include("partials/header", { title: "Write" }) %>
+
+<section class="compose-page">
+
+  <p class="eyebrow">NEW ARTICLE</p>
+
+  <h1>Write something worth reading.</h1>
+
+  <form action="/posts" method="POST" class="compose-form">
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Enter your article title"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+      <input
+        type="text"
+        id="category"
+        name="category"
+        placeholder="Programming, Career, JavaScript..."
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="excerpt">Short description</label>
+      <textarea
+        id="excerpt"
+        name="excerpt"
+        rows="3"
+        placeholder="A short description of your article"
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Article</label>
+      <textarea
+        id="content"
+        name="content"
+        rows="15"
+        placeholder="Start writing..."
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="button">Publish article</button>
+
+  </form>
+
+</section>
+
+<%- include("partials/footer") %>

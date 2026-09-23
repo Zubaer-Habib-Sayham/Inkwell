@@ -1,0 +1,65 @@
+<%- include("partials/header", { title: "Edit Article" }) %>
+
+<section class="compose-page">
+
+  <p class="eyebrow">EDIT ARTICLE</p>
+
+  <h1>Make it better.</h1>
+
+  <form action="/posts/<%= post.id %>/edit" method="POST" class="compose-form">
+
+    <div class="form-group">
+      <label for="title">Title</label>
+
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value="<%= post.title %>"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+
+      <input
+        type="text"
+        id="category"
+        name="category"
+        value="<%= post.category %>"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="excerpt">Short description</label>
+
+      <textarea
+        id="excerpt"
+        name="excerpt"
+        rows="3"
+        required
+      ><%= post.excerpt %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Article</label>
+
+      <textarea
+        id="content"
+        name="content"
+        rows="15"
+        required
+      ><%= post.content %></textarea>
+    </div>
+
+    <button type="submit" class="button">
+      Save changes
+    </button>
+
+  </form>
+
+</section>
+
+<%- include("partials/footer") %>

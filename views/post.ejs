@@ -1,0 +1,53 @@
+<main>
+<%- include("partials/header", { title: post.title }) %>
+
+<article class="single-post">
+
+  <header class="post-header">
+
+    <p class="eyebrow">
+      <%= post.category %>
+    </p>
+
+    <h1>
+      <%= post.title %>
+    </h1>
+
+    <p class="post-excerpt">
+      <%= post.excerpt %>
+    </p>
+
+    <div class="post-meta">
+      <span><%= post.date %></span>
+      <span><%= post.readTime %> min read</span>
+    </div>
+
+  </header>
+
+  <div class="post-content">
+    <%= post.content %>
+  </div>
+
+  <div class="post-actions">
+
+    <a href="/" class="back-link">← Back to articles</a>
+
+    <div class="post-buttons">
+
+        <a href="/posts/<%= post.id %>/edit" class="edit-button">
+        Edit article
+        </a>
+
+        <form action="/posts/<%= post.id %>/delete" method="POST">
+        <button type="submit" class="delete-button">
+            Delete article
+        </button>
+        </form>
+
+    </div>
+
+  </div>
+
+</article>
+
+<%- include("partials/footer") %>
