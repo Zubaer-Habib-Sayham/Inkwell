@@ -8,9 +8,23 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
+  const search = req.query.search || "";
+
+  const filteredPosts = posts.filter((post) => {
+    const searchText = search.toLowerCase();
+
+    return (
+      post.title.toLowerCase().includes(searchText) ||
+      post.excerpt.toLowerCase().includes(searchText) ||
+      post.category.toLowerCase().includes(searchText) ||
+      post.content.toLowerCase().includes(searchText)
+    );
+  });
+
   res.render("index.ejs", {
     title: "Home",
-    posts: posts,
+    posts: filteredPosts,
+    search: search,
   });
 });
 

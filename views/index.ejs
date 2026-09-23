@@ -13,45 +13,76 @@
   <a href="/compose" class="button">Write an article</a>
 </section>
 
-<section class="articles-section">
+<div class="section-heading">
 
-  <div class="section-heading">
-    <div>
-      <p class="eyebrow">LATEST</p>
-      <h2>Recent articles</h2>
-    </div>
+  <div>
+    <p class="eyebrow">LATEST</p>
+    <h2>Recent articles</h2>
   </div>
 
-  <div class="article-grid">
+  <form action="/" method="GET" class="search-form">
 
-    <% posts.forEach(post => { %>
+    <input
+      type="search"
+      name="search"
+      placeholder="Search articles..."
+      value="<%= search %>"
+    >
+
+    <button type="submit">Search</button>
+
+  </form>
+
+</div>
+
+  <% if (posts.length === 0) { %>
+
+    <div class="empty-state">
+
+        <h3>No articles found.</h3>
+
+        <p>
+        Try searching for something else.
+        </p>
+
+    </div>
+
+    <% } else { %>
+
+    <div class="article-grid">
+
+        <% posts.forEach(post => { %>
 
         <a href="/post/<%= post.id %>" class="article-link">
 
             <article class="article-card">
 
-                <p class="article-category">
+            <p class="article-category">
                 <%= post.category %>
-                </p>
+            </p>
 
-                <h3>
+            <h3>
                 <%= post.title %>
-                </h3>
+            </h3>
 
-                <p class="article-excerpt">
+            <p class="article-excerpt">
                 <%= post.excerpt %>
-                </p>
+            </p>
 
-                <div class="article-meta">
+            <div class="article-meta">
                 <span><%= post.date %></span>
                 <span><%= post.readTime %> min read</span>
-                </div>
+            </div>
 
             </article>
 
         </a>
 
-    <% }) %>
+        <% }) %>
+
+    </div>
+
+  <% } %>
 
     </div>
 
