@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+body.dark-mode {
+  --background: #181716;
+  --surface: #242220;
+  --text: #f4f1eb;
+  --muted: #aaa49b;
+  --border: #3a3733;
+  --accent: #f4f1eb;
+  --color: var(--background);
+}
+
 :root {
   --background: #f7f4ef;
   --surface: #ffffff;
@@ -91,7 +101,7 @@ main {
   display: inline-block;
   padding: 13px 22px;
   background: var(--accent);
-  color: white;
+  color: rgb(0, 0, 0);
   border-radius: 4px;
   font-family: Arial, sans-serif;
   font-size: 0.9rem;
@@ -412,7 +422,7 @@ main {
   padding: 11px 16px;
   border: none;
   background: var(--accent);
-  color: white;
+  color: black;
   font-family: Arial, sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
@@ -424,7 +434,36 @@ main {
   opacity: 0.85;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.theme-button {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.theme-button:hover {
+  background: var(--surface);
+}
+
 @media (max-width: 600px) {
+  .header-actions {
+    gap: 12px;
+  }
+
+  .theme-button {
+    padding: 7px 9px;
+  }
+
   .site-header {
     padding: 22px 18px;
   }
