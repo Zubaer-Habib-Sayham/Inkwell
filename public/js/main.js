@@ -1,18 +1,34 @@
 const themeToggle = document.getElementById("theme-toggle");
 
-const savedTheme = localStorage.getItem("theme");
+if (themeToggle) {
+  const savedTheme = localStorage.getItem("theme");
 
-if (savedTheme === "dark") {
-  document.body.classList.add("dark-mode");
-  themeToggle.textContent = "Light";
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    themeToggle.textContent = "Light";
+  }
+
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    const isDark = document.body.classList.contains("dark-mode");
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    themeToggle.textContent = isDark ? "Light" : "Dark";
+  });
 }
 
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
+const deleteForms = document.querySelectorAll(".delete-form");
 
-  const isDark = document.body.classList.contains("dark-mode");
+deleteForms.forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this article?",
+    );
 
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-
-  themeToggle.textContent = isDark ? "Light" : "Dark";
+    if (!confirmed) {
+      event.preventDefault();
+    }
+  });
 });

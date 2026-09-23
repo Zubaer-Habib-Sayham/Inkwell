@@ -4,24 +4,27 @@ import posts from "./data/posts.js";
 const app = express();
 const port = 3000;
 
-app.use(express.static("public"));
+app.set("view engine", "ejs");
+
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  const search = req.query.search || "";
+  const search = (req.query.search || "").trim();
+  const searchText = search.toLowerCase();
 
-  const filteredPosts = posts.filter((post) => {
-    const searchText = search.toLowerCase();
+  const filteredPosts = searchText
+    ? posts.filter((post) => {
+        return (
+          post.title.toLowerCase().includes(searchText) ||
+          post.excerpt.toLowerCase().includes(searchText) ||
+          post.category.toLowerCase().includes(searchText) ||
+          post.content.toLowerCase().includes(searchText)
+        );
+      })
+    : posts;
 
-    return (
-      post.title.toLowerCase().includes(searchText) ||
-      post.excerpt.toLowerCase().includes(searchText) ||
-      post.category.toLowerCase().includes(searchText) ||
-      post.content.toLowerCase().includes(searchText)
-    );
-  });
-
-  res.render("index.ejs", {
+  res.render("index", {
     title: "Home",
     posts: filteredPosts,
     search: search,
@@ -32,19 +35,19 @@ app.get("/post/:id", (req, res) => {
   const post = posts.find((post) => post.id === Number(req.params.id));
 
   if (!post) {
-    return res.status(404).render("404.ejs", {
+    return res.status(404).render("404", {
       title: "Not Found",
     });
   }
 
-  res.render("post.ejs", {
+  res.render("post", {
     title: post.title,
     post: post,
   });
 });
 
 app.get("/compose", (req, res) => {
-  res.render("compose.ejs", {
+  res.render("compose", {
     title: "Write",
   });
 });
@@ -78,7 +81,7 @@ app.post("/posts/:id/delete", (req, res) => {
   );
 
   if (postIndex === -1) {
-    return res.status(404).render("404.ejs", {
+    return res.status(404).render("404", {
       title: "Not Found",
     });
   }
@@ -92,12 +95,12 @@ app.get("/posts/:id/edit", (req, res) => {
   const post = posts.find((post) => post.id === Number(req.params.id));
 
   if (!post) {
-    return res.status(404).render("404.ejs", {
+    return res.status(404).render("404", {
       title: "Not Found",
     });
   }
 
-  res.render("edit.ejs", {
+  res.render("edit", {
     title: "Edit Article",
     post: post,
   });
@@ -123,6 +126,18 @@ app.post("/posts/:id/edit", (req, res) => {
   );
 
   res.redirect(`/post/${post.id}`);
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", {
+    title: "About",
+  });
+});
+
+app.use((req, res) => {
+  res.status(404).render("404", {
+    title: "Not Found",
+  });
 });
 
 app.listen(port, () => {
